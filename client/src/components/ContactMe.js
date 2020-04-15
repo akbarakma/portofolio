@@ -10,15 +10,15 @@ const ContactMe = (props) => {
           <input type="hidden" name="_captcha" value="false" />
           <div className="form-group">
             <h4>Your Name</h4>
-            <input type="text" name="name" className="form-control" />
+            <input required type="text" name="name" className="form-control" />
           </div>
           <div className="form-group">
             <h4>Your Email Address</h4>
-            <input type="email" name="email" className="form-control" />
+            <input required type="email" name="email" className="form-control" />
           </div>
           <div className="form-group">
             <h4>Your Message</h4>
-            <textarea className="form-control" name="message" rows="3"></textarea>
+            <textarea required className="form-control" name="message" rows="3"></textarea>
           </div>
           <div className="text-center mt-4">
             <button type="submit" className="btn btn-success shadow" style={{ height: '40px' }}>
