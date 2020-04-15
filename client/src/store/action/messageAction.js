@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://thawing-temple-80581.herokuapp.com';
 
 export const getMessage = () => {
   return async dispatch => {

@@ -9,7 +9,7 @@ const Suggestion = () => {
   const [message, setMessage] = useState('');
   const sendSuggestion = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post('http://localhost:3000', {
+    const { data } = await axios.post('https://thawing-temple-80581.herokuapp.com', {
       name,
       message
     });
