@@ -5,7 +5,9 @@ const initialState = [];
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_MESSAGE':
-      return [...state, state.concat(action.payload)];
+      return [...state, ...action.payload];
+    case 'ADD_MESSAGE':
+      return [action.payload, ...state];
     default:
       return state;
   }
