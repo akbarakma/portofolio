@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import Loading from './Loading';
 
 const Suggestion = () => {
   const dispatch = useDispatch();
   const suggestionMessage = useSelector(state => state);
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const sendSuggestion = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const { data } = await axios.post('https://thawing-temple-80581.herokuapp.com', {
       name,
       message
@@ -16,7 +19,8 @@ const Suggestion = () => {
     dispatch({
       type: 'ADD_MESSAGE',
       payload: data
-    })
+    });
+    setLoading(false);
   };
   return (
     <div style={{ paddingTop: '40px', height: '1000px', backgroundColor: '#fc7703' }}>
@@ -34,12 +38,14 @@ const Suggestion = () => {
             <textarea onChange={ (e) => setMessage(e.target.value) } className="form-control" rows="3"></textarea>
           </div>
         </div>
-        <div className="text-center mt-4">
-          <button type="submit" className="btn btn-success shadow" style={{ height: '40px' }}>
-          <i className="fas fa-envelope mx-1"></i>
-            Send This Suggestions
-          </button>
-        </div>
+        { loading ? <Loading /> : 
+          <div className="text-center mt-4">
+            <button type="submit" className="btn btn-success shadow" style={{ height: '40px' }}>
+            <i className="fas fa-envelope mx-1"></i>
+              Send This Suggestions
+            </button>
+          </div>
+        }
       </form>
       <h2>All of Your Suggestions</h2>
       <div style={{ height: '500px', overflow: 'auto', maxWidth: '900px', margin: 'auto' }}>
