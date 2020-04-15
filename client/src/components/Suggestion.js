@@ -11,15 +11,17 @@ const Suggestion = () => {
   const [loading, setLoading] = useState(false);
   const sendSuggestion = async (event) => {
     event.preventDefault();
-    setLoading(true);
-    const { data } = await axios.post('https://thawing-temple-80581.herokuapp.com', {
-      name,
-      message
-    });
-    dispatch({
-      type: 'ADD_MESSAGE',
-      payload: data
-    });
+    if (name && message) {
+      setLoading(true);
+      const { data } = await axios.post('https://thawing-temple-80581.herokuapp.com', {
+        name,
+        message
+      });
+      dispatch({
+        type: 'ADD_MESSAGE',
+        payload: data
+      });
+    }
     setLoading(false);
   };
   return (
@@ -29,13 +31,13 @@ const Suggestion = () => {
         <div data-aos="fade-down-right">
           <div className="form-group">
             <h4>Your Name</h4>
-            <input onChange={ (e) => setName(e.target.value) } type="text" className="form-control" />
+            <input required onChange={ (e) => setName(e.target.value) } type="text" className="form-control" />
           </div>
         </div>
         <div data-aos="fade-down-left">
           <div className="form-group">
             <h4>Your Suggestions</h4>
-            <textarea onChange={ (e) => setMessage(e.target.value) } className="form-control" rows="3"></textarea>
+            <textarea required onChange={ (e) => setMessage(e.target.value) } className="form-control" rows="3"></textarea>
           </div>
         </div>
         { loading ? <Loading /> : 
